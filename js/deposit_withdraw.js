@@ -14,11 +14,20 @@ function updateTotalField(totalField, deposit) {
     totalDepositAmount.innerText = parseFloat(totalDepositAmountText) + deposit;
 }
 
-//Function for Balance
-function updateBalance(amount, isAdd) {
+//
+function getCurrentBalance() {
     const balance = document.getElementById('balance');
     const balanceText = balance.innerText;
     const previousBalanceTotal = parseFloat(balanceText);
+    return previousBalanceTotal;
+}
+
+//Function for Balance
+function updateBalance(amount, isAdd) {
+    const balance = document.getElementById('balance');
+    // const balanceText = balance.innerText;
+    // const previousBalanceTotal = parseFloat(balanceText);
+    const previousBalanceTotal = getCurrentBalance();
     if (isAdd == true) {
         balance.innerText = previousBalanceTotal + amount;
     } else {
@@ -36,19 +45,20 @@ document.getElementById('deposit-submit').addEventListener("click", function() {
         updateTotalField('total-deposit-amount', deposit);
         updateBalance(deposit, true);
     }
-
 });
 
 //Withdraw Event
 document.getElementById('withdraw-submit').addEventListener("click", function() {
 
     const withdraw = getInputValue('withdraw-amount');
+    const currentBalance = getCurrentBalance();
 
-    if (withdraw > 0) {
+    if (withdraw > 0 && withdraw < currentBalance) {
         updateTotalField('total-withdraw-amount', withdraw);
         updateBalance(withdraw, false);
+    } else {
+        console.log('You can not withdraw more then Balance');
     }
-
 });
 
 
