@@ -6,6 +6,7 @@ function getInputValue(inputId) {
     inputField.value = '';
     return deposit;
 }
+
 //Function for Total deposit, total withdraw
 function updateTotalField(totalField, deposit) {
     const totalDepositAmount = document.getElementById(totalField);
@@ -14,7 +15,7 @@ function updateTotalField(totalField, deposit) {
     totalDepositAmount.innerText = parseFloat(totalDepositAmountText) + deposit;
 }
 
-//
+// Get Current Balance 
 function getCurrentBalance() {
     const balance = document.getElementById('balance');
     const balanceText = balance.innerText;
